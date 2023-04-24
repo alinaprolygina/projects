@@ -1,0 +1,18 @@
+{% extends 'Base.html' %}
+
+{% block titel %}
+Запрос 3
+{% endblock %}
+
+{% block body %}
+<body>
+<div class=container>
+<form action="" method="post">
+    <p>Введите имя покупателя для отображения шифров и названий товаров, которые человек покупал в апреле 2013 года:</p>
+    <input type="text" placeholder="имя покупателя" name="name">
+    <input type="submit" value="Отправить">
+</form>
+    <br><a href="/Reserv">Назад</a>
+</div>
+</body>
+{% endblock %}

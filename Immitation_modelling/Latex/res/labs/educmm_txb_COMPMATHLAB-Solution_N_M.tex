@@ -1,0 +1,672 @@
+\subsection{Цель выполнения домашнего задания}\label{blockN.VariantM}
+\textbf{Цель выполнения домашнего задания }-- \GoalOfResearch
+
+%-------------------------------------------------
+\subsection{Задание}
+Система состоит из устройств типа $A$ и типа $B$, интенсивности отказов $\lambda_A$ и $\lambda_B$ известны.
+Для функционирования системы требуется хотя бы одно устройство типа $A$ и хотя бы $N_B$ устройств типа $B$.
+Общее число устройств в системе (включая резервные) – $R_A$ и $R_B$ соответственно,
+причём в нормальном состоянии одновременно включены сразу $N_A$ устройств типа $A$.
+
+Если $N$ – номер зачётной книжки, а $G$ – последняя цифра в номере группы,
+то параметры системы определяются следующим образом:
+\[
+\begin{matrix}
+    \lambda_A= G + (N \bmod 3) \\
+    \lambda_B= G + (N \bmod 5) \\
+    N_A= 2 + (G \bmod 2) \\
+    N_B= 2 + (N \bmod 2) \\
+    R_A= 4 + (G \bmod 2) \\
+    R_B= 5 - (G \bmod 2)
+\end{matrix}
+\]
+
+Требуется:
+\begin{enumerate}
+    \item нарисовать граф состояний системы;
+    \item составить матрицу интенсивностей переходов;
+    \item записать дифференциальные уравнения Колмогорова;
+    \item аналитически решить полученную систему уравнений, исходя из того, что в начальный момент времени все устройства исправны;
+    \item построить графики вероятностей нахождения системы в каждом из возможных состояний с течением времени;
+    \item построить график функции надёжности системы;
+    \item рассчитать математическое ожидание времени безотказной работы;
+    \item провести имитационное моделирование системы в терминах непрерывных марковских цепей 100 раз, рассчитать среднее выборочное значение и стандартное отклонение времени безотказной работы системы.
+\end{enumerate}
+%-------------------------------------------------
+\newpage
+\subsection{Решение}
+
+Рассчитаем начальные данные для выполнения домашнего задания по номеру зачетки $N = 34$ и группы $G = 2$:
+\[
+\begin{matrix}
+    \lambda_A & = G + (N \bmod 3) = 2 + (34 \bmod 3) = & 3 \\
+    \lambda_B & = G + (N \bmod 5) = 2 + (34 \bmod 5) = & 6 \\
+    N_A & = 2 + (G \bmod 2) = 2 + (2 \bmod 2) = & 2 \\
+    N_B & = 2 + (N \bmod 2) = 2 + (34 \bmod 2) = & 2 \\
+    R_A & = 4 + (G \bmod 2) = 4 + (2 \bmod 2) = & 4 \\
+    R_B & = 5 - (G \bmod 2) = 5 - (2 \bmod 2) = & 5
+\end{matrix}
+\]
+Предположим что $S^{ab}_{cd}$ - состояние системы, где
+\begin{itemize}
+    \item $a$ - количество работающих устройств типа $A$, включая резервные,
+    \item $b$ - количество резервных устройств типа $A$,
+    \item $c$ - количество работающих устройств типа $B$, включая резервные,
+    \item $d$ - количество резервных устройств типа $B$.
+\end{itemize}
+На рисунке \ref{graph} изображен граф состояний системы.
+
+
+\begin{figure}[H]
+\centerline{ 
+\begin{tikzpicture}[>=latex,line join=bevel,]
+  \pgfsetlinewidth{1bp}
+label=graph%
+\pgfsetcolor{black}
+  % Edge: s2223 -> s2222
+  \pgfsetcolor{blue}
+  \draw [->] (148.94bp,609.21bp) .. controls (143.41bp,597.45bp) and (135.9bp,581.48bp)  .. (124.73bp,557.76bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (141.85bp,583.5bp) node {$2\lambda_B$};
+  % Edge: s2223 -> s2123
+  \pgfsetcolor{blue}
+  \draw [->] (165.15bp,609.21bp) .. controls (170.96bp,597.45bp) and (178.84bp,581.48bp)  .. (190.57bp,557.76bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (181.85bp,583.5bp) node {$2\lambda_A$};
+  % Edge: s2222 -> s2221
+  \pgfsetcolor{blue}
+  \draw [->] (112.8bp,521.8bp) .. controls (110.12bp,510.39bp) and (106.53bp,495.16bp)  .. (100.89bp,471.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (110.85bp,496.5bp) node {$2\lambda_B$};
+  % Edge: s2222 -> s2122
+  \pgfsetcolor{blue}
+  \draw [->] (128.51bp,523.01bp) .. controls (137.46bp,510.74bp) and (149.99bp,493.57bp)  .. (167.03bp,470.21bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (153.85bp,496.5bp) node {$2\lambda_A$};
+  % Edge: s2123 -> s2122
+  \pgfsetcolor{blue}
+  \draw [->] (194.8bp,521.8bp) .. controls (192.12bp,510.39bp) and (188.53bp,495.16bp)  .. (182.89bp,471.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (191.85bp,496.5bp) node {$2\lambda_B$};
+  % Edge: s2123 -> s2023
+  \pgfsetcolor{blue}
+  \draw [->] (210.51bp,523.01bp) .. controls (219.46bp,510.74bp) and (231.99bp,493.57bp)  .. (249.03bp,470.21bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (234.85bp,496.5bp) node {$2\lambda_A$};
+  % Edge: s2221 -> s2220
+  \pgfsetcolor{blue}
+  \draw [->] (94.824bp,434.8bp) .. controls (93.495bp,423.51bp) and (91.726bp,408.47bp)  .. (88.868bp,384.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (94.847bp,409.5bp) node {$2\lambda_B$};
+  % Edge: s2221 -> s2121
+  \pgfsetcolor{blue}
+  \draw [->] (110.05bp,436.41bp) .. controls (120.74bp,423.79bp) and (135.99bp,405.79bp)  .. (155.48bp,382.78bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (139.85bp,409.5bp) node {$2\lambda_A$};
+  % Edge: s2122 -> s2121
+  \pgfsetcolor{blue}
+  \draw [->] (176.82bp,434.8bp) .. controls (175.5bp,423.51bp) and (173.73bp,408.47bp)  .. (170.87bp,384.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (175.85bp,409.5bp) node {$2\lambda_B$};
+  % Edge: s2122 -> s2022
+  \pgfsetcolor{blue}
+  \draw [->] (192.05bp,436.41bp) .. controls (202.74bp,423.79bp) and (217.99bp,405.79bp)  .. (237.48bp,382.78bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (220.85bp,409.5bp) node {$2\lambda_A$};
+  % Edge: s2023 -> s2022
+  \pgfsetcolor{blue}
+  \draw [->] (258.82bp,434.8bp) .. controls (257.5bp,423.51bp) and (255.73bp,408.47bp)  .. (252.87bp,384.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (257.85bp,409.5bp) node {$2\lambda_B$};
+  % Edge: s2023 -> s1023
+  \pgfsetcolor{blue}
+  \draw [->] (274.05bp,436.41bp) .. controls (284.74bp,423.79bp) and (299.99bp,405.79bp)  .. (319.48bp,382.78bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (302.85bp,409.5bp) node {$2\lambda_A$};
+  % Edge: s2220 -> s2210
+  \pgfsetcolor{blue}
+  \draw [->] (76.243bp,348.61bp) .. controls (68.406bp,336.5bp) and (57.58bp,319.77bp)  .. (42.419bp,296.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (64.847bp,322.5bp) node {$2\lambda_B$};
+  % Edge: s2220 -> s2120
+  \pgfsetcolor{blue}
+  \draw [->] (92.311bp,347.8bp) .. controls (95.934bp,336.39bp) and (100.77bp,321.16bp)  .. (108.39bp,297.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (104.85bp,322.5bp) node {$2\lambda_A$};
+  % Edge: s2121 -> s2120
+  \pgfsetcolor{blue}
+  \draw [->] (158.24bp,348.61bp) .. controls (150.41bp,336.5bp) and (139.58bp,319.77bp)  .. (124.42bp,296.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (146.85bp,322.5bp) node {$2\lambda_B$};
+  % Edge: s2121 -> s2021
+  \pgfsetcolor{blue}
+  \draw [->] (173.82bp,347.82bp) .. controls (176.67bp,338.15bp) and (180.35bp,325.87bp)  .. (183.85bp,315.0bp) .. controls (184.61bp,312.61bp) and (185.42bp,310.14bp)  .. (189.85bp,297.05bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (185.85bp,322.5bp) node {$2\lambda_A$};
+  % Edge: s2022 -> s2021
+  \pgfsetcolor{blue}
+  \draw [->] (240.24bp,348.61bp) .. controls (232.41bp,336.5bp) and (221.58bp,319.77bp)  .. (206.42bp,296.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (227.85bp,322.5bp) node {$2\lambda_B$};
+  % Edge: s2022 -> s1022
+  \pgfsetcolor{blue}
+  \draw [->] (255.82bp,347.82bp) .. controls (258.67bp,338.15bp) and (262.35bp,325.87bp)  .. (265.85bp,315.0bp) .. controls (266.61bp,312.61bp) and (267.42bp,310.14bp)  .. (271.85bp,297.05bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (267.85bp,322.5bp) node {$2\lambda_A$};
+  % Edge: s1023 -> s1022
+  \pgfsetcolor{blue}
+  \draw [->] (322.24bp,348.61bp) .. controls (314.41bp,336.5bp) and (303.58bp,319.77bp)  .. (288.42bp,296.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (309.85bp,322.5bp) node {$2\lambda_B$};
+  % Edge: s1023 -> s0023
+  \pgfsetcolor{blue}
+  \draw [->] (338.31bp,347.8bp) .. controls (341.93bp,336.39bp) and (346.77bp,321.16bp)  .. (354.39bp,297.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (349.85bp,322.5bp) node {$1\lambda_A$};
+  % Edge: s2120 -> s2110
+  \pgfsetcolor{blue}
+  \draw [->] (103.44bp,261.61bp) .. controls (95.741bp,249.5bp) and (85.112bp,232.77bp)  .. (70.227bp,209.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (92.847bp,235.5bp) node {$2\lambda_B$};
+  % Edge: s2120 -> s2020
+  \pgfsetcolor{blue}
+  \draw [->] (119.51bp,260.8bp) .. controls (123.27bp,249.39bp) and (128.29bp,234.16bp)  .. (136.19bp,210.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (131.85bp,235.5bp) node {$2\lambda_A$};
+  % Edge: s2021 -> s2020
+  \pgfsetcolor{blue}
+  \draw [->] (185.44bp,261.61bp) .. controls (177.74bp,249.5bp) and (167.11bp,232.77bp)  .. (152.23bp,209.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (173.85bp,235.5bp) node {$2\lambda_B$};
+  % Edge: s2021 -> s1021
+  \pgfsetcolor{blue}
+  \draw [->] (201.51bp,260.8bp) .. controls (205.27bp,249.39bp) and (210.29bp,234.16bp)  .. (218.19bp,210.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (212.85bp,235.5bp) node {$2\lambda_A$};
+  % Edge: s1022 -> s1021
+  \pgfsetcolor{blue}
+  \draw [->] (267.44bp,261.61bp) .. controls (259.74bp,249.5bp) and (249.11bp,232.77bp)  .. (234.23bp,209.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (255.85bp,235.5bp) node {$2\lambda_B$};
+  % Edge: s1022 -> s0022
+  \pgfsetcolor{blue}
+  \draw [->] (283.51bp,260.8bp) .. controls (287.27bp,249.39bp) and (292.29bp,234.16bp)  .. (300.19bp,210.18bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (294.85bp,235.5bp) node {$1\lambda_A$};
+  % Edge: s2020 -> s2010
+  \pgfsetcolor{blue}
+  \draw [->] (132.01bp,174.61bp) .. controls (124.75bp,162.5bp) and (114.71bp,145.77bp)  .. (100.65bp,122.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (121.85bp,148.5bp) node {$2\lambda_B$};
+  % Edge: s2020 -> s1020
+  \pgfsetcolor{blue}
+  \draw [->] (147.97bp,174.21bp) .. controls (152.19bp,162.64bp) and (157.89bp,147.01bp)  .. (166.63bp,123.05bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (160.85bp,148.5bp) node {$2\lambda_A$};
+  % Edge: s1021 -> s1020
+  \pgfsetcolor{blue}
+  \draw [->] (214.01bp,174.61bp) .. controls (206.75bp,162.5bp) and (196.71bp,145.77bp)  .. (182.65bp,122.34bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (202.85bp,148.5bp) node {$2\lambda_B$};
+  % Edge: s1021 -> s0021
+  \pgfsetcolor{blue}
+  \draw [->] (229.97bp,174.21bp) .. controls (234.19bp,162.64bp) and (239.89bp,147.01bp)  .. (248.63bp,123.05bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (242.85bp,148.5bp) node {$1\lambda_A$};
+  % Edge: s1020 -> s1010
+  \pgfsetcolor{blue}
+  \draw [->] (164.75bp,87.207bp) .. controls (159.08bp,75.448bp) and (151.38bp,59.485bp)  .. (139.93bp,35.758bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (155.85bp,61.5bp) node {$2\lambda_B$};
+  % Edge: s1020 -> s0020
+  \pgfsetcolor{blue}
+  \draw [->] (180.95bp,87.207bp) .. controls (186.62bp,75.448bp) and (194.32bp,59.485bp)  .. (205.76bp,35.758bp);
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (196.85bp,61.5bp) node {$1\lambda_A$};
+  % Node: s2223
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{0.0,1.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (156.85bp,627.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (156.85bp,627.0bp) node {$S^{22}_{23}$};
+\end{scope}
+  % Node: s2222
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (116.85bp,540.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (116.85bp,540.0bp) node {$S^{22}_{22}$};
+\end{scope}
+  % Node: s2123
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (198.85bp,540.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (198.85bp,540.0bp) node {$S^{21}_{23}$};
+\end{scope}
+  % Node: s2221
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (96.85bp,453.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (96.847bp,453.0bp) node {$S^{22}_{21}$};
+\end{scope}
+  % Node: s2122
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (178.85bp,453.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (178.85bp,453.0bp) node {$S^{21}_{22}$};
+\end{scope}
+  % Node: s2023
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (260.85bp,453.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (260.85bp,453.0bp) node {$S^{20}_{23}$};
+\end{scope}
+  % Node: s2220
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (86.85bp,366.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (86.847bp,366.0bp) node {$S^{22}_{20}$};
+\end{scope}
+  % Node: s2121
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (168.85bp,366.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (168.85bp,366.0bp) node {$S^{21}_{21}$};
+\end{scope}
+  % Node: s2022
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (250.85bp,366.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (250.85bp,366.0bp) node {$S^{20}_{22}$};
+\end{scope}
+  % Node: s1023
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (332.85bp,366.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (332.85bp,366.0bp) node {$S^{10}_{23}$};
+\end{scope}
+  % Node: s2210
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,0.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (31.85bp,279.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (31.847bp,279.0bp) node {$S^{22}_{10}$};
+\end{scope}
+  % Node: s2120
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (113.85bp,279.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (113.85bp,279.0bp) node {$S^{21}_{20}$};
+\end{scope}
+  % Node: s2021
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (195.85bp,279.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (195.85bp,279.0bp) node {$S^{20}_{21}$};
+\end{scope}
+  % Node: s1022
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (277.85bp,279.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (277.85bp,279.0bp) node {$S^{10}_{22}$};
+\end{scope}
+  % Node: s0023
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,0.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (359.85bp,279.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (359.85bp,279.0bp) node {$S^{00}_{23}$};
+\end{scope}
+  % Node: s2110
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,0.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (59.85bp,192.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (59.847bp,192.0bp) node {$S^{21}_{10}$};
+\end{scope}
+  % Node: s2020
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (141.85bp,192.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (141.85bp,192.0bp) node {$S^{20}_{20}$};
+\end{scope}
+  % Node: s1021
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (223.85bp,192.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (223.85bp,192.0bp) node {$S^{10}_{21}$};
+\end{scope}
+  % Node: s0022
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,0.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (305.85bp,192.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (305.85bp,192.0bp) node {$S^{00}_{22}$};
+\end{scope}
+  % Node: s2010
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,0.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (90.85bp,105.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (90.847bp,105.0bp) node {$S^{20}_{10}$};
+\end{scope}
+  % Node: s1020
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \draw (172.85bp,105.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (172.85bp,105.0bp) node {$S^{10}_{20}$};
+\end{scope}
+  % Node: s0021
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,0.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (254.85bp,105.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (254.85bp,105.0bp) node {$S^{00}_{21}$};
+\end{scope}
+  % Node: s1010
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,0.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (131.85bp,18.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (131.85bp,18.0bp) node {$S^{10}_{10}$};
+\end{scope}
+  % Node: s0020
+\begin{scope}
+  \definecolor{strokecol}{rgb}{0.0,0.0,0.0};
+  \pgfsetstrokecolor{strokecol}
+  \definecolor{fillcol}{rgb}{1.0,0.0,0.0};
+  \pgfsetfillcolor{fillcol}
+  \filldraw [opacity=1] (213.85bp,18.0bp) ellipse (31.7bp and 18.0bp);
+  \draw (213.85bp,18.0bp) node {$S^{00}_{20}$};
+\end{scope}
+%
+\end{tikzpicture}
+ }
+\caption{Граф состояний системы}
+\label{graph}
+\end{figure}
+
+\newpage
+Переобозначим состояния следующим образом: $S_{0} = S^{22}_{23}$, $S_{1} = S^{22}_{22}$, $S_{2} = S^{21}_{23}$, $S_{3} = S^{22}_{21}$, $S_{4} = S^{21}_{22}$, $S_{5} = S^{20}_{23}$, $S_{6} = S^{22}_{20}$, $S_{7} = S^{21}_{21}$, $S_{8} = S^{20}_{22}$, $S_{9} = S^{10}_{23}$, $S_{10} = S^{22}_{10}$, $S_{11} = S^{21}_{20}$, $S_{12} = S^{20}_{21}$, $S_{13} = S^{10}_{22}$, $S_{14} = S^{00}_{23}$, $S_{15} = S^{21}_{10}$, $S_{16} = S^{20}_{20}$, $S_{17} = S^{10}_{21}$, $S_{18} = S^{00}_{22}$, $S_{19} = S^{20}_{10}$, $S_{20} = S^{10}_{20}$, $S_{21} = S^{00}_{21}$, $S_{22} = S^{10}_{10}$, $S_{23} = S^{00}_{20}$.
+
+На основании построенного графа состояний можно составить матрицу интенсивностей переходов (матрица \ref{matrix}).
+Необходимо заметить, что диоганальные элементы матрицы равны отрицательной сумме всех остальных элементов строки.
+
+\[
+    \resizebox{\textwidth}{!}{$
+    \Lambda =
+    \begin{pmatrix}
+    -18 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & -18 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & -18 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -18 & 0 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & -18 & 0 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & -18 & 0 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & -18 & 0 & 0 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & -18 & 0 & 0 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -18 & 0 & 0 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -15 & 0 & 0 & 0 & 12 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -18 & 0 & 0 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -18 & 0 & 0 & 0 & 12 & 6 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -15 & 0 & 0 & 0 & 12 & 3 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -18 & 0 & 0 & 12 & 6 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -15 & 0 & 0 & 12 & 3 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -15 & 0 & 12 & 3 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
+    \end{pmatrix}
+    \tag{1} \label{matrix}
+    $}
+\]
+
+\newpage
+
+Составим систему дифференциальных уравнений Kолмогорова.
+\[
+\begin{cases}
+    P^\prime_{0} =-12P_{0} (t) -6P_{0} (t) \\ 
+P^\prime_{1} = 12P_{0} (t) -12P_{1} (t) -6P_{1} (t) \\ 
+P^\prime_{2} = 6P_{0} (t) -12P_{2} (t) -6P_{2} (t) \\ 
+P^\prime_{3} = 12P_{1} (t) -12P_{3} (t) -6P_{3} (t) \\ 
+P^\prime_{4} = 6P_{1} (t) +12P_{2} (t) -12P_{4} (t) -6P_{4} (t) \\ 
+P^\prime_{5} = 6P_{2} (t) -12P_{5} (t) -6P_{5} (t) \\ 
+P^\prime_{6} = 12P_{3} (t) -12P_{6} (t) -6P_{6} (t) \\ 
+P^\prime_{7} = 6P_{3} (t) +12P_{4} (t) -12P_{7} (t) -6P_{7} (t) \\ 
+P^\prime_{8} = 6P_{4} (t) +12P_{5} (t) -12P_{8} (t) -6P_{8} (t) \\ 
+P^\prime_{9} = 6P_{5} (t) -12P_{9} (t) -3P_{9} (t) \\ 
+P^\prime_{10} = 12P_{6} (t) \\ 
+P^\prime_{11} = 6P_{6} (t) +12P_{7} (t) -12P_{11} (t) -6P_{11} (t) \\ 
+P^\prime_{12} = 6P_{7} (t) +12P_{8} (t) -12P_{12} (t) -6P_{12} (t) \\ 
+P^\prime_{13} = 6P_{8} (t) +12P_{9} (t) -12P_{13} (t) -3P_{13} (t) \\ 
+P^\prime_{14} = 3P_{9} (t) \\ 
+P^\prime_{15} = 12P_{11} (t) \\ 
+P^\prime_{16} = 6P_{11} (t) +12P_{12} (t) -12P_{16} (t) -6P_{16} (t) \\ 
+P^\prime_{17} = 6P_{12} (t) +12P_{13} (t) -12P_{17} (t) -3P_{17} (t) \\ 
+P^\prime_{18} = 3P_{13} (t) \\ 
+P^\prime_{19} = 12P_{16} (t) \\ 
+P^\prime_{20} = 6P_{16} (t) +12P_{17} (t) -12P_{20} (t) -3P_{20} (t) \\ 
+P^\prime_{21} = 3P_{17} (t) \\ 
+P^\prime_{22} = 12P_{20} (t) \\ 
+P^\prime_{23} = 3P_{20} (t) 
+\end{cases}
+\]
+
+Начальные условия:
+$$P_0(t=0)=1$$
+$$P_i(t=0)=0 \quad \forall i \in [1, 24]$$
+
+Найдем функцию $P_0(t)$.
+\begin{gather*}
+    \frac{dP_0(t)}{dt} = -18 P_0 (t)\\
+    \int \frac{1}{P_0 (t)} d P_0(t) = \int -18 dt\\
+    \int d \ln P_0 (t) = \int -18 dt\\
+    \ln P_0 (t) = -18 t + c\\
+    P_0 (t) = e^{-18 t + c}\\
+    P_0(t = 0) = 1 => e^{-18 t + c} = 1 => c = 0\\
+    P_0 (t) = e^{-18 t}\\
+\end{gather*}
+
+Теперь найдем функцию $P_1 (t)$
+\begin{gather*}
+    \frac{d P_1(t)}{dt} = 12 e^{-18 t} - 18 P_1(t)\\
+    \frac{d P_1(t)}{dt} + 18 P_1(t) = 12 e^{ -18 t} \quad |\cdot e^{ 18 t} \\
+    e^{ 18 t} \frac{d P_1(t)}{dt} + e^{ 18 t} 18 P_1(t) = 12\\
+    \frac{d P_1(t) \cdot e^{ 18 t }}{dt} = 12\\
+    \int \frac{d P_1(t) \cdot e^{ 18 t } }{dt} dt = \int 12 dt\\
+    P_1(t) e^{ 18 t } = 12 t + c => P_1(t) = ( 12 t + c) e^{ -18 t } \\
+    P_1(t=0) = 0 => ( 0 + c ) e^{ -18 t } = 0 => c=0\\
+    P_1(t) = 12 e^{ -18 t } t\\
+\end{gather*}
+
+Аналогично вычисляется $P_2 (t)$:
+\begin{gather*}
+    P_2(t) = 6 e^{- 18 t}t\\
+\end{gather*}
+
+На основе $P_1 (t)$ и $P_2 (t)$ найдем $P_4 (t)$:
+\begin{gather*}
+    \frac{d P_4(t)}{dt} = 12 P_1 (t) + 6 P_2 (t) - 18 P_4(t)\\
+    \frac{d P_4(t)}{dt} + 18 P_4(t) = 144 e^{- 18 t} t\\
+    \frac{d}{dt} (e^{ 18 t} P_4(t)) = 144 t\\
+    \int \frac{d}{dt} (e^{ 18 t} P_4(t)) dt = \int 144 t dt\\
+    e^{ 18 t} P_4(t) = 72 t^2 + c \\
+    y(0) = 0 => P_4(t) = e^{ -18 t} ( 72 t^2 + c), c = 0 \\
+    P_4(t) = 72 e^{ -18 t} t^2\\
+\end{gather*}
+
+\newpage
+По аналогии с $P_1 (t)$, $P_2 (t)$ и $P_4 (t)$ вычислим функции вероятностей для всех нетерминальных состояний:
+\begin{gather*}
+    P_{1} (t)=12e^{-18t} t^1 \\ 
+P_{2} (t)=6e^{-18t} t^1 \\ 
+P_{3} (t)=72e^{-18t} t^2 \\ 
+P_{4} (t)=72e^{-18t} t^2 \\ 
+P_{5} (t)=18e^{-18t} t^2 \\ 
+P_{6} (t)=288e^{-18t} t^3 \\ 
+P_{7} (t)=432e^{-18t} t^3 \\ 
+P_{8} (t)=216e^{-18t} t^3 \\ 
+P_{9} (t)=36e^{-18t} t^3 \\ 
+P_{11} (t)=1728e^{-18t} t^4 \\ 
+P_{12} (t)=1296e^{-18t} t^4 \\ 
+P_{13} (t)=432e^{-18t} t^4 \\ 
+P_{16} (t)=5184e^{-18t} t^5 \\ 
+P_{17} (t)=2592e^{-18t} t^5 \\ 
+P_{20} (t)=10368e^{-18t} t^6 \\ 
+\end{gather*}
+
+По вычисленным функциям были построены графики вероятностей нахождения системы в каждом из возможных <<рабочих>> состояний с течением времени (рис. \ref{P_0} и \ref{P_i}).
+\begin{figure}[H]
+\centerline{\includegraphics[scale = 0.8]{Images/graph_0.png}}
+\caption{Функция вероятности для начального состояния}
+\label{P_0}
+\end{figure}
+
+\begin{figure}[H]
+\centerline{\includegraphics[scale = 0.8]{Images/graph.png}}
+\caption{Функции вероятностей для нетерминальных состояний}
+\label{P_i}
+\end{figure}
+
+Найдем функцию вероятности системы для терминального состояния.
+\begin{align*}
+    P_{term}&=1 - \sum P_{not\_trem}
+\end{align*}
+\begin{equation}
+    \begin{aligned}
+    P_{term} = 1 - e^{-9 t} ( 10368t^6 + 7776t^5 + 3456t^4 + 972t^3 + 162t^2 + 18t^1 + 1 )
+    \end{aligned}
+\end{equation}
+
+\subsubsection{Функция надежности системы}
+
+Функция надежности может быть определена следующим образом:
+$$R(t)= 1 - P_{term}(t)$$
+
+График функции надежности $R(t)$ представлен на рисунке \ref{R_t}.
+\begin{figure}[H]
+\centerline{\includegraphics[scale = .8]{Images/R_t.png}}
+\caption{Функция надежности системы}
+\label{R_t}
+\end{figure}
+Математическое ожидание может быть вычислено по следующей формуле:
+$$\mu = \int\limits_0^{+\infty}R(t)dt = 0.305746075293400$$
+
+\subsubsection{Имитационное моделирование}
+
+Для системы с непрерывным временем была реализована функция, осуществляющая переходы по состояниям.
+
+\begin{lstlisting}[language=python, label=prog,caption={\textit{реализация марковского процесса}}]
+# моделирование одного эпизода с непрерывным временем
+def MD(m):
+    current_s = 0
+    current_t = 0
+    states_tr = [current_s]
+    t_tr=[current_t]
+
+    while np.max(m[current_s]) != 0:  # пока не упали в терминальное
+        lb, la = find_lambda(m[current_s])
+
+        # t = -log(1-y)/lambda
+        t_a = F_t(la,np.random.uniform(low=0.0, high=1.0, size=None))
+        t_b = F_t(lb, np.random.uniform(low=0.0, high=1.0, size=None))
+
+        # переход по "минимальному" времени
+        current_t += min(t_a, t_b)
+        current_s = m[current_s].index(la)*(t_a<t_b) + m[current_s].index(lb)*(t_a>=t_b)
+
+        # для дальнейшей отрисовки
+        states_tr.append(current_s)
+        t_tr.append(current_t)
+
+    return current_t, states_tr, t_tr
+\end{lstlisting}
+
+На рисунке \ref{MDP} представлен график переключению состояний системы для 15 прогонов ($N=15$).
+\begin{figure}[H]
+\centerline{\includegraphics[scale = .8]{Images/term.png}}
+\caption{График переключению состояний системы}
+\label{MDP}
+\end{figure}
+
+Для $N=100$
+$$S=\sqrt{D\frac{N}{N-1}}= 0.144,$$
+$$\hat{t}=0.3150162361146376,$$
+где $S$ - стандартное, $\hat{t}$ - среднее отклонение.
+
+%-------------------------------------------------
+\subsection{Вывод}
+В ходе выполнения домашнего задания была промоделирована работа СМО в терминах непрерывных марковских цепей,
+а также выполнен анализ ее работы.
+
+% --------------------------------------
+% Атрибуты задачи
+\labattributes{}{}{}{}{студент группы \EduGroup, \Author}{\Year, \Semestr}
+%--------------

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+        font-size: 50px;
+    }
+</style>
+<body>
+    <div align="center">
+        <p><a href={{url_for('zapros.zaproses')}}>Работа с запросами</a></p>
+        <p><a href="{{url_for('reports.report_page')}}">Работа с отчетами</a></p>
+        <p><a href="{{url_for('auth_app.login_page')}}">Авторизация</a></p>
+        <p><a href="">Выход</a></p>
+    </div>
+</body>
+</html>

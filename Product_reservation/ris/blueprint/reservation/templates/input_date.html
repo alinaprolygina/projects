@@ -1,0 +1,19 @@
+{% extends 'Base.html' %}
+
+{% block titel %}
+Запрос 3
+{% endblock %}
+
+{% block body %}
+<body>
+<div class=container>
+<form action="" method="post">
+    <p>Введите месяц и год для отображения вcех сведения о покупателях, ни разу не сделавших заказ на покупку товаров в это время.:</p>
+    <input type="number" placeholder="месяц" name="month">
+    <input type="number" placeholder="год" name="year">
+    <input type="submit" value="Отправить">
+</form>
+    <br><a href="/Reserv">Назад</a>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'Base.html' %}
+
+{% block titel %}
+Запрос 2
+{% endblock %}
+
+{% block body %}
+<body>
+<div class=container>
+<form action="" method="post">
+    <p>Введите материал для вывода сведений о самом дорогом товаре на складе, который из него изготовлен:</p>
+    <input type="text" placeholder="материал" name="material">
+    <input type="submit" value="Отправить">
+</form>
+    <br><a href="/Reserv">Назад</a>
+</div>
+</body>
+{% endblock %}

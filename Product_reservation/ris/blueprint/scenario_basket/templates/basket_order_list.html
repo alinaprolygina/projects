@@ -1,0 +1,43 @@
+{% extends 'Base.html' %}
+{% block titel %}
+Basket
+{% endblock %}
+
+{% block body %}
+<body>
+    {% import 'basket_utils.html' as utils %}
+
+    <div class="container">
+        <div class="row">
+            <h5 align="left"> Для клиента "{{ c_name['customer_name'] }}" доступны товары:</h5>
+            <div class="col-md-5">
+            <h4 align="center"> Товары</h4>
+                {% if items %}
+                    {% for item in items %}
+                        {{ utils.render_item(item, show_form=True) }}
+                    {% endfor %}
+                {% else %}
+                <p>Нет товаров</p>
+                {% endif %}
+            </div>
+            <div class="col-md-5">
+                <h4 align="center"> Корзина</h4>
+                {% if basket %}
+                    {% for item in basket %}
+                        {{ utils.render_item(item, show_form=False) }}
+                    {% endfor %}
+                {% else %}
+                <p align="center">Корзина пустая</p>
+                {% endif %}
+            </div>
+            <div class="col-md-2">
+                <a href="buy">Зарезервировать</a>
+                <br>
+                <a href="clear">Очистить корзину</a>
+                <br>
+                <a href="/basket/choose_client">Назад</a>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zapros2</title>
+</head>
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+        font-size: 30px;
+    }
+</style>
+<body>
+        <div align="center">
+            <p><font size = 6>Показать все заказы, стоимость которых выше заданного значения</font></p>
+            <form action={{url_for('zapros.get_sql2')}} method="post">
+                <p><font size = 6>Введите иностранный язык:
+                <input type="text" name="lang">
+                <input type="submit" name="Отправить">
+
+            </font></p>
+            <a href="http://127.0.0.1:5002">Выход в меню</a>
+            </form>
+        </div>
+</body>
+</html>

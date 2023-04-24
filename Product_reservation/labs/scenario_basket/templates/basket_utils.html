@@ -1,0 +1,17 @@
+{% macro render_item(item, show_form=False) %}
+<div style="border-style: solid; border-color: red; margin: 10px">
+    <p>
+        <span>Название: {{ item['service_name'] }}</span>
+        <span>Язык: {{ item['foreighn_language'] }}</span>
+        <span>Цена: {{ item['service_cost'] }}</span>
+    </p>
+    {% if show_form %}
+        <div>
+            <form action="" method="post">
+                <input type="submit" value="Добавить">
+                <input type="hidden" name="service_id" value="{{ item['service_id'] }}">
+            </form>
+        </div>
+    {% endif %}
+</div>
+{% endmacro %}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask course</title>
+</head>
+<style>
+    .text-style{
+        text-align: center;
+    }
+</style>
+<body class="text-style">
+<font size="6" face="Times New Roman">Добавить клиента</font>
+
+<form action="" method="post">
+    <br>
+<!--    <input type="number" placeholder="id" name="value1">-->
+    <input type="text" placeholder="Покупатель" name="value1">
+    <input type="date" placeholder="Дата заказа" name="value2">
+    <input type="number" placeholder="Стоимость" name="value3">
+    <input type="submit" value="Отправить">
+    <br>
+    <br>
+    <a href="{{url_for('change_tables.change_index')}}"> Вернуться назад</a>
+</form>
+
+</body>
+</html>

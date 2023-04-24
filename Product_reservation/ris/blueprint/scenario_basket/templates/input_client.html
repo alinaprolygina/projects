@@ -1,0 +1,25 @@
+{% extends 'Base.html' %}
+
+{% block titel %}
+Form
+{% endblock %}
+
+{% block body %}
+<body>
+{% import 'basket_utils.html' as utils %}
+<div class="container">
+    <h5> Подтвердите покупку для покупателя "{{ c_name['customer_name'] }}"</h5>
+    {% if basket %}
+        {% for item in basket %}
+            {{ utils.render_item(item, show_form=False) }}
+        {% endfor %}
+    {% else %}
+        <p>Корзина пустая</p>
+    {% endif %}
+    <form action="" method="post">
+        <input type="submit" value="Подтвердить">
+    </form>
+        <br><a href="/basket">Назад</a>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,1 @@
+INSERT INTO language_courses.services_basket (service_id, service_name, foreighn_language, service_cost) VALUES ($service_id, '$service_name', '$foreighn_language', $service_cost)

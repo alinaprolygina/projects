@@ -1,0 +1,18 @@
+{% extends 'Base.html' %}
+{% macro render_item(item, show_form=False) %}
+<div style="border-style: solid; border-color: black; border-width: 1px; margin: 5%">
+    <ul>
+        <li>Дата заказа: {{ item['order_date'] }};</li>
+        <li>Заказанное количество: {{ item['ordered_number'] }};</li>
+        <li>Стоимость: {{ item['costs'] }}.</li>
+    </ul>
+    {% if show_form %}
+        <div align="center">
+            <form action="" method="post">
+                <input type="submit" value="Выбрать">
+                <input type="hidden" name="ord_id" value="{{ item['ord_id'] }}">
+            </form>
+        </div>
+    {% endif %}
+</div>
+{% endmacro %}

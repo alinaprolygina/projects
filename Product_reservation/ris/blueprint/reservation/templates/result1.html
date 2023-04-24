@@ -1,0 +1,37 @@
+{% extends 'Base.html' %}
+
+{% block titel %}
+Результат 1
+{% endblock %}
+
+{% block body %}
+<body>
+ <div style="text-align: center;">
+     <h5>Шифры и названия товаров, которые покупатель с названием ХХХ покупал в апреле 2013 года:</h5>
+        <p>
+            {% if keys == 0 %}
+                {{ itemList[0] }}
+            {% else %}
+                 <table align="center">
+                    <tr>
+                        {% for key in k_list %}
+                            <th>{{ key }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for item in itemList %}
+                        <tr>
+                            {% for key1 in keys %}
+                                <td>{{ item[key1] }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        </p>
+    <br><a href="/Reserv"> Назад</a>
+    </div>
+
+ </body>
+{% endblock %}
+
+

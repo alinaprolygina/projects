@@ -1,0 +1,43 @@
+{% extends 'Base.html' %}
+{% block titel %}
+Basket
+{% endblock %}
+
+{% block body %}
+<body>
+    {% import 'basket_utilspay.html' as utils %}
+
+    <div class="container">
+        <div class="row">
+            <h5 align="left"> Неоплаченные заказы для клиента "{{ c_name[0]['customer_name'] }}":</h5>
+            <div class="col-md-5">
+            <h4 align="center"> Заказы</h4>
+                {% if items %}
+                    {% for item in items %}
+                        {{ utils.render_item(item, show_form=True) }}
+                    {% endfor %}
+                {% else %}
+                <p>Нет товаров</p>
+                {% endif %}
+            </div>
+            <div class="col-md-5">
+                <h4 align="center"> Оплатить заказы</h4>
+                {% if basket %}
+                    {% for item in basket %}
+                        {{ utils.render_item(item, show_form=False) }}
+                    {% endfor %}
+                {% else %}
+                <p align="center">Заказ не выбран</p>
+                {% endif %}
+            </div>
+            <div class="col-md-2">
+                <a href="buytopay">Оплатить</a>
+                <br>
+                <a href="clearpay">Очистить корзину заказов</a>
+                <br>
+                <a href="/pay/choose_clientpay">Назад</a>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

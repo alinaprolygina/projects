@@ -1,0 +1,36 @@
+{% extends 'Base.html' %}
+{% block titel %}
+Basket
+{% endblock %}
+
+{% block body %}
+<body>
+<div style="text-align: center;">
+
+    <h5 align="center">Список покупателей</h5>
+    <br>
+    <table align="center">
+        {% for i in name%}
+            <th>{{i}}</th>
+        {% endfor %}
+        {% for item in res%}
+        <tr>
+            <td> {{item['customer_name']}} </td>
+            <td> {{item['city']}} </td>
+            <td> {{item['telephone']}} </td>
+            <td> {{item['contract_date']}} </td>
+            <td> {{item['summ']}} </td>
+            <td>
+                <form action="" method="post">
+                    <input type=hidden name="c_id" value="{{  item['c_id'] }}">
+                    <input type="submit" name="action" value="Выбрать">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br><a href="/"> Назад</a>
+</div>
+</body>
+{% endblock %}

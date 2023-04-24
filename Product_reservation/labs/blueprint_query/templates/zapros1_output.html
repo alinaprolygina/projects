@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zapros1</title>
+</head>
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+        font-size: 20px;
+    }
+</style>
+<body>
+    <div align="center">
+        <table border="1" width="50%" cellpadding="5">
+        {% for item in items %}
+        <tr>
+            {% for key, values in item.items() %}
+                <td style="font-size:25px">{{values}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <div align="center">
+        <p ><a href="/zapros">Выход в меню</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+solid 0.5.stl
+facet normal -0.5 0.0 -0.8660254
+outer loop
+vertex 150.0 50.0 -156.6025
+vertex 34.52999 50.0 -156.6025
+vertex 150.0 50.0 -156.6025
+endloop
+endfacet
+facet normal -0.5 0.0 -0.8660254
+outer loop
+vertex 150.0 50.0 -156.6025
+vertex 34.52999 50.0 -156.6025
+vertex 34.52999 50.0 -156.6025
+endloop
+endfacet
+facet normal 0.5 0.0 -0.8660254
+outer loop
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -156.6025
+endloop
+endfacet
+facet normal 0.5 0.0 -0.8660254
+outer loop
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -156.6025
+endloop
+endfacet
+facet normal 1.0 -0.0 0.0
+outer loop
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -41.13249
+endloop
+endfacet
+facet normal 1.0 0.0 0.0
+outer loop
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -156.6025
+endloop
+endfacet
+facet normal 0.5 -0.0 0.8660254
+outer loop
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+endloop
+endfacet
+facet normal 0.5 0.0 0.8660254
+outer loop
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+endloop
+endfacet
+facet normal -0.5 0.0 0.8660254
+outer loop
+vertex 34.52999 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+vertex 34.52999 50.0 -41.13249
+endloop
+endfacet
+facet normal -0.5 0.0 0.8660254
+outer loop
+vertex 34.52999 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+endloop
+endfacet
+facet normal -1.0 0.0 0.0
+outer loop
+vertex 34.52999 50.0 -156.6025
+vertex 34.52999 50.0 -41.13249
+vertex 34.52999 50.0 -156.6025
+endloop
+endfacet
+facet normal -1.0 0.0 0.0
+outer loop
+vertex 34.52999 50.0 -156.6025
+vertex 34.52999 50.0 -41.13249
+vertex 34.52999 50.0 -41.13249
+endloop
+endfacet
+facet normal -0.0 1.0 0.0
+outer loop
+vertex 34.52999 50.0 -156.6025
+vertex 34.52999 50.0 -41.13249
+vertex 150.0 50.0 -156.6025
+endloop
+endfacet
+facet normal 0.0 1.0 -0.0
+outer loop
+vertex 150.0 50.0 -156.6025
+vertex 34.52999 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+endloop
+endfacet
+facet normal 0.0 1.0 0.0
+outer loop
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -156.6025
+endloop
+endfacet
+facet normal 0.0 1.0 -0.0
+outer loop
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -41.13249
+endloop
+endfacet
+facet normal 0.0 -1.0 0.0
+outer loop
+vertex 34.52999 50.0 -41.13249
+vertex 34.52999 50.0 -156.6025
+vertex 150.0 50.0 -41.13249
+endloop
+endfacet
+facet normal 0.0 -1.0 -0.0
+outer loop
+vertex 150.0 50.0 -41.13249
+vertex 34.52999 50.0 -156.6025
+vertex 150.0 50.0 -156.6025
+endloop
+endfacet
+facet normal 0.0 -1.0 0.0
+outer loop
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -41.13249
+endloop
+endfacet
+facet normal 0.0 -1.0 -0.0
+outer loop
+vertex 150.0 50.0 -41.13249
+vertex 150.0 50.0 -156.6025
+vertex 150.0 50.0 -156.6025
+endloop
+endfacet
+endsolid 0.5.stl

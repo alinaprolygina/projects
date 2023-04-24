@@ -1,0 +1,29 @@
+{
+  "accountant": [
+    "auth.login_page",
+    "reservation.query_list",
+    "reservation.sql1"
+  ],
+  "manager": [
+    "",
+    "auth.login_page",
+    "reservation.query_list",
+    "reservation.sql1",
+    "reservation.sql2"
+  ],
+  "director":[
+    "",
+    "auth.login_page",
+    "reservation.query_list",
+    "reservation.sql1",
+    "reservation.sql2",
+    "reservation.sql3",
+    "basket.choose_client",
+    "basket.basket",
+    "pay.basket",
+    "pay.choose_client"
+  ],
+  "unauthorized": [
+    "auth.login_page"
+  ]
+}

@@ -1,0 +1,24 @@
+{% extends 'Base.html' %}
+{% macro render_item(item, show_form=False) %}
+<div style="border-style: solid; border-color: black; border-width: 1px; margin: 5%">
+    <ul>
+        <li>Название: {{ item[0]['titles'] }};</li>
+        <li>Материал: {{ item[0]['materials'] }};</li>
+        <li>Наименование: {{ item[0]['units'] }};</li>
+        <li>Цена за штуку: {{ item[0]['unit_value'] }}.</li>
+    </ul>
+    {% if show_form %}
+        <div align="center">
+            <form action="" method="post">
+                <input type="number" placeholder="количество товара" name="ordered_number" value="{{ item[1] }}">
+                <input type="submit" value="Добавить">
+                <input type="hidden" name="art_id" value="{{ item[0]['art_id'] }}">
+            </form>
+        </div>
+    {% else %}
+        <p align="center">
+            Количество: {{ item[1] }}
+        </p>
+    {% endif %}
+</div>
+{% endmacro %}

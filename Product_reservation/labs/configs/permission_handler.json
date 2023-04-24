@@ -1,0 +1,14 @@
+{
+  "student": [
+    "order_index"
+  ],
+  "teacher": [
+    "billboard_index"
+  ],
+  "admin": [
+    "basket_app.basket"
+  ],
+  "unauthorized": [
+    "login_page"
+  ]
+}

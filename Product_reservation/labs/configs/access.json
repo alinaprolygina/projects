@@ -1,0 +1,32 @@
+{
+  "student": [
+    "auth.login_page"
+  ],
+  "teacher": [
+    "",
+    "auth.login_page",
+    "zapros.zaproses",
+    "zapros.zaprose2_input",
+    "zapros.get_sql2",
+    "reports.report_page",
+    "change_tables.change_index",
+    "change_tables.update_tests"
+
+
+  ],
+  "admin":[
+    "",
+    "auth.login_page",
+    "zapros.zaproses",
+    "zapros.zaprose1_input",
+    "zapros.get_sql1",
+    "reports.report_page",
+    "change_tables.change_index",
+    "change_tables.change_tests",
+    "change_tables.update_tests",
+    "basket.basket"
+  ],
+  "unauthorized": [
+    "auth.login_page"
+  ]
+}

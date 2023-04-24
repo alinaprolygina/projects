@@ -1,0 +1,8 @@
+\babel@toc {russian}{}\relax 
+\contentsline {section}{Теория надежности}{3}{section*.2}%
+\contentsline {subsection}{\numberline {1}Цель выполнения домашнего задания}{3}{subsection.0.1}%
+\contentsline {subsection}{\numberline {2}Задание}{3}{subsection.0.2}%
+\contentsline {subsection}{\numberline {3}Решение}{4}{subsection.0.3}%
+\contentsline {subsubsection}{Функция надежности системы}{11}{section*.7}%
+\contentsline {subsubsection}{Имитационное моделирование}{11}{section*.9}%
+\contentsline {subsection}{\numberline {4}Вывод}{13}{subsection.0.4}%

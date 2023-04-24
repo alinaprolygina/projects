@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<style>
+    a {
+        color: black;
+        text-decoration: none;
+        font-size: 30px;
+    }
+</style>
+<body>
+
+    <div align="center">
+        <h1>Главное меню</h1>
+        <p><a href={{url_for('zapros.zaproses')}}>Работа с запросами</a></p>
+        <p><a href="{{url_for('reports.report_page')}}">Работа с отчетами</a></p>
+        <p><a href="{{url_for('auth_app.login_page')}}">Авторизация</a></p>
+        <p><a href="{{url_for('change_tables.change_index')}}">Редактирование</a></p>
+        <p><a href="/basket">Корзина</a></p>
+        <p><a href="http://127.0.0.1:5002/exit">Выход</a></p>
+    </div>
+</body>
+</html>

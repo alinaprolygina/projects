@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask course</title>
+    <style>
+        .main-table{
+            border: 2px solid black;
+            padding: 5px 10px;
+        }
+
+        .text-style{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="text-style">
+    <a href="{{url_for('change_tables.change_tests')}}"><font size="6" face="Times New Roman"> Добавить заказ </font> </a>
+    <br>
+<!--    <a href="{{url_for('change_tables.update_tests')}}"><font size="6" face="Times New Roman"> Обновить заказ </font> </a>-->
+<!--    <br>-->
+    <font size="6" face="Times New Roman">Список заказов</font>
+
+<div class="">
+    <br>
+    <table class="main-table test-style" style="display: inline-block;">
+        {% for i in name%}
+            <th>{{i}}</th>
+        {% endfor %}
+        {% for item in res%}
+        <tr>
+<!--            <td class="main-table"> {{item['order_id']}} </td>-->
+            <td class="main-table"> {{item['customer']}} </td>
+            <td class="main-table"> {{item['order_date']}} </td>
+            <td class="main-table"> {{item['general_cost']}} </td>
+            <td>
+                <form action="" method="post">
+                    <input type=hidden name="order_id" value="{{  item['order_id'] }}">
+                    <input type="submit" name="action" value="Удалить">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+    <br>
+    <h1>
+        <a href="/"> Вернуться назад</a>
+    </h1>
+</div>
+</body>
+</html>

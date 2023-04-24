@@ -1,0 +1,1 @@
+Select summ from new_schema.customer
